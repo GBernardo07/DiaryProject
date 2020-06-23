@@ -16,7 +16,7 @@ struct Diary {
     void add(const std::string &message);
     void write();
 
-}
+};
 
 
 

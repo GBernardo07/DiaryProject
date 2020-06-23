@@ -5,11 +5,11 @@
 
 App::App(const std::string &filename) : diary(filename) {
 
-}
+};
 
 int App::run(int argc, char *argv[]) {
     if (argc == 1) {
-        return show_usage();
+        return show_usage(argv[0]);
     }
 
     std::string action = argv[1];
@@ -27,39 +27,46 @@ int App::run(int argc, char *argv[]) {
     else if (action == "search") {
     } 
     else {
-        return show_usage();
+        return show_usage(argv[0]);
     }
 
     return 0;
-}
+};
 
-void App::add()
+int App::add()
 {
     std::string message;
     std::cout << "Enter your message:" << std::endl;
     std::getline(std::cin, message);
 
     add(message);
-}
 
-void App::add(const std::string message)
+    return 1;
+};
+
+int App::add(const std::string message)
 {
     diary.add(message);
     diary.write();
-}
 
-void App::list()
+    return 1;
+};
+
+int App::list()
 {
     for (size_t i = 0; i < diary.messages_size; ++i) {
         const Message& message = diary.messages[i];
         std::cout << "-" << message.content << std::endl;
     }
-}
 
-int App::show_usage(char *argv[])
+    return 1;
+};
+
+int App::show_usage(char *program)
 {
     std::cout << "Uso: \n";
-    std::cout << argv[0] << " add <mensagem>\n";
-    std::cout << argv[0] << " list" << std::endl;
+    std::cout << program << " add <mensagem>\n";
+    std::cout << program << " list" << std::endl;
+
     return 1;
-}
+};
