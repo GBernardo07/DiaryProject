@@ -3,24 +3,16 @@
 
 #include <string>
 #include "timing.h"
+#include "date.h"
 
-struct message {
+struct Message {
 
-    time clock_moment;
-    date calendar_moment;
-    std::string text;
+    std::string content;
+    Date date;
+    Time time;
 
     bool compare_messages();
 
 };
-
-struct diary {
-
-    message *content;
-
-    int addText(message entry, std::ifstream outfile);
-    int list(std::ifstream infile);
-
-}
 
 #endif

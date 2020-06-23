@@ -1,22 +1,15 @@
 #ifndef TIME_H
 #define TIME_H
 
-struct date {
-    
-    int day;
-    int month;
-    int year;
+#include <string>
 
-    bool compare_dates(const date &another_date);
+struct Time {
 
-};
+    unsigned hour;
+    unsigned minute;
+    unsigned second;
 
-struct time {
-
-    int hour;
-    int minute;
-    int second;
-
+    void convert_from_string(const std::string  &time);
 };
 
 #endif
