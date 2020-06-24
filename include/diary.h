@@ -9,7 +9,7 @@ struct Diary {
     Diary(const std::string &filename);
 
     std::string filename;
-    Message* messages;
+    Message *messages;
     size_t messages_size;
     size_t messages_capacity;
 
