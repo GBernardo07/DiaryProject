@@ -6,6 +6,7 @@
 
 struct Date {
 
+    Date();
     unsigned year;
     unsigned month;
     unsigned day;

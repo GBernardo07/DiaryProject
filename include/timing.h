@@ -5,6 +5,7 @@
 
 struct Time {
 
+    Time();
     unsigned hour;
     unsigned minute;
     unsigned second;
