@@ -8,6 +8,8 @@ Diary::Diary(const std::string &filename) : messages_capacity(10), messages(null
 }
 
 void Diary::add(const std::string &message) {
+    if (messages_size == messages_capacity)
+        return;
     Message base_msg;
     base_msg.content = message;
     messages[messages_size] = base_msg;
