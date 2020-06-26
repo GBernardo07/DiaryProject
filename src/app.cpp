@@ -5,15 +5,9 @@
 
 App::App(const std::string &filename) : diary(filename) {
 
-    diary.filename = filename;
-
 };
 
 int App::run(int argc, char *argv[]) {
-
-    diary.getMessages();
-    std::string longEntry;
-
     if (argc == 1)
         return show_usage(argv[0]);
 
@@ -24,15 +18,11 @@ int App::run(int argc, char *argv[]) {
             add();
         else {
             for (int i = 2; i < argc; i++) {
-                longEntry += argv[i];
-                longEntry += ' ';
+                std::cout << argv[i] << std::endl;
+                add(argv[i]);
             }
-            longEntry.erase(longEntry.end()-1);
-            add(longEntry);
         }
-        diary.write();
     } 
-
     else if (action == "list")
         list();
     else
@@ -44,16 +34,19 @@ int App::run(int argc, char *argv[]) {
 int App::add()
 {
     std::string message;
+    for (int j = 0; j < 10; j++) {
         std::cout << "Enter your message:" << std::endl;
         std::getline(std::cin, message);
 
         diary.add(message);
+    }
 
     return 1;
 };
 
 int App::add(const std::string message) {
     diary.add(message);
+    diary.write();
 
     return 1;
 };
