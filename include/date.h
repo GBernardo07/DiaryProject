@@ -12,7 +12,8 @@ struct Date {
     unsigned day;
 
     void convert_from_string(const std::string &date);
+    int isEqual(const Date &date);
+    std::string convert_to_string();
 };
-
 
 #endif

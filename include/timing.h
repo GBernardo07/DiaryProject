@@ -11,6 +11,7 @@ struct Time {
     unsigned second;
 
     void convert_from_string(const std::string  &time);
+    std::string convert_to_string();
 };
 
 #endif
