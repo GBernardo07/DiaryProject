@@ -7,6 +7,7 @@
 struct Diary {
 
     Diary(const std::string &filename);
+    ~Diary();
 
     std::string filename;
     Message *messages;
@@ -15,6 +16,8 @@ struct Diary {
 
     void add(const std::string &message);
     void write();
+    void getMessages();
+    void extendArray();
 
 };
 
