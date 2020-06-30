@@ -15,6 +15,7 @@ struct App {
     int add();
     int add(const std::string message);
     int list();
+    
 };
 
 #endif

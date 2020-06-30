@@ -11,6 +11,7 @@ App::App(const std::string &filename) : diary(filename) {
 
 int App::run(int argc, char *argv[]) {
 
+    Message *foundIn;
     diary.getMessages();
     std::string longEntry;
 
@@ -35,6 +36,15 @@ int App::run(int argc, char *argv[]) {
 
     else if (action == "list")
         list();
+    else if (action == "search") {
+        foundIn = diary.search(argv[2]);
+        if (foundIn != nullptr) {
+            std::cout << "Achado em: " << foundIn->content << std::endl;
+        }
+        else {
+            std::cout << "Nao existem mensagens com esse termo" << std::endl;
+        }
+    }
     else
         return show_usage(argv[0]);
 

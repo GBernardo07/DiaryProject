@@ -12,6 +12,7 @@ Diary::Diary(const std::string &filename) : messages_capacity(5), messages(nullp
 Diary::~Diary() {
 
     delete[] messages;
+
 }
 
 void Diary::add(const std::string &message) {
@@ -74,6 +75,16 @@ void Diary::getMessages() {
             i++;
         }
     }
+}
+
+Message* Diary::search(std::string what) {
+
+    std::size_t foundAt;
+    for(int i = 0; i < messages_size; ++i) {
+        if(foundAt != messages[i].content.find(what))
+            return &messages[i];
+    }
+    return nullptr;
 }
 
 void Diary::extendArray() {

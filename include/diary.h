@@ -18,6 +18,7 @@ struct Diary {
     void write();
     void getMessages();
     void extendArray();
+    Message *search(std::string what);
 
 };
 
