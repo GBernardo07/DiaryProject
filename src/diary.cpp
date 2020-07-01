@@ -4,26 +4,23 @@
 #include <iostream>
 #include <fstream>
 
-Diary::Diary(const std::string &filename) : messages_capacity(5), messages(nullptr), messages_size(0) {
+Diary::Diary(const std::string &filename) {
    
-    messages = new Message[messages_capacity];
+    std::vector<Message> messages;
 }
 
-Diary::~Diary() {
+/*Diary::~Diary() {
 
     delete[] messages;
-
-}
+}*/
 
 void Diary::add(const std::string &message) {
-    if (messages_size == messages_capacity)
-        extendArray();
+    
     Message base_msg;
     base_msg.content = message;
     base_msg.date.convert_from_string(get_current_date());
     base_msg.time.convert_from_string(get_current_time());
-    messages[messages_size] = base_msg;
-    messages_size++;  
+    messages.push_back(base_msg);
 }
 
 void Diary::write() {
@@ -34,7 +31,7 @@ void Diary::write() {
     outfile << "# " << messages[0].date.convert_to_string() << std::endl;
     outfile << "- " << messages[0].time.convert_to_string() << " " << messages[0].content << std::endl;
 
-    for (int i = 1; i < messages_size; i++){
+    for (int i = 1; i < messages.size(); i++){
         if (!messages[i].date.isEqual(messages[i-1].date)) {
             outfile << "# " << messages[i].date.convert_to_string() << std::endl;
         }
@@ -57,8 +54,6 @@ void Diary::getMessages() {
         return;
         
     while (!infile.eof()){
-        if (messages_size == messages_capacity)
-            extendArray();
 
         std::getline(infile, line);
         
@@ -70,24 +65,24 @@ void Diary::getMessages() {
             line.erase(0,2);
             oldMessage.time.convert_from_string(line);
             oldMessage.content = line.substr(9);
-            messages[i] = oldMessage;
-            messages_size++;
+            messages.push_back(oldMessage);
             i++;
         }
     }
 }
 
-Message* Diary::search(std::string what) {
+std::vector<Message> *Diary::search(std::string what, std::vector<Message> *whatVectorP) {
 
     std::size_t foundAt;
-    for(int i = 0; i < messages_size; ++i) {
-        if(foundAt != messages[i].content.find(what))
-            return &messages[i];
+    for(int i = 0; i < messages.size(); ++i) {
+        if(foundAt != messages[i].content.find(what)) {
+            whatVectorP->push_back(messages[i]);
+        }
     }
-    return nullptr;
+    return whatVectorP;
 }
 
-void Diary::extendArray() {
+/*void Diary::extendArray() {
 
     messages_capacity *= 2;
     Message *moreMessages = new Message[messages_capacity];
@@ -97,4 +92,4 @@ void Diary::extendArray() {
 
     delete[] messages;
     messages = moreMessages;
-}
+}*/

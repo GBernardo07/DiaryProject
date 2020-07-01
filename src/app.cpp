@@ -11,7 +11,7 @@ App::App(const std::string &filename) : diary(filename) {
 
 int App::run(int argc, char *argv[]) {
 
-    Message *foundIn;
+    std::vector<Message> *foundIn;
     diary.getMessages();
     std::string longEntry;
 
@@ -37,9 +37,13 @@ int App::run(int argc, char *argv[]) {
     else if (action == "list")
         list();
     else if (action == "search") {
-        foundIn = diary.search(argv[2]);
+        std::vector<Message> whatVector;
+        foundIn = diary.search(argv[2], &whatVector);
         if (foundIn != nullptr) {
-            std::cout << "Achado em: " << foundIn->content << std::endl;
+            std::cout << "Achado em: " << std::endl;
+            for (int i = 0; i < whatVector.size(); ++i) {
+                std::cout << whatVector[i].content << std::endl;
+            } 
         }
         else {
             std::cout << "Nao existem mensagens com esse termo" << std::endl;
@@ -69,7 +73,7 @@ int App::add(const std::string message) {
 };
 
 int App::list() {
-    for (size_t i = 0; i < diary.messages_size; ++i) {
+    for (size_t i = 0; i < diary.messages.size(); ++i) {
         const Message& message = diary.messages[i];
         std::cout << "-" << message.content << std::endl;
     }
