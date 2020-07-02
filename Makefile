@@ -25,3 +25,7 @@ app.o: src/app.cpp
 
 $(EXECUTABLE): $(OBJECTS)
 	$(GCC) $(OBJECTS) $(CFLAGS)-o $(EXECUTABLE)
+
+clean:
+	rm -rf *.o
+	rm $(EXECUTABLE)
